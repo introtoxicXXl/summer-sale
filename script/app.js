@@ -1,9 +1,12 @@
-function addToCart(id, name) {
+function getPrice(id){
     const textPrice = document.getElementById(id).innerText;
-    const textAddPrice = document.getElementById('add-price').innerText;
-    const productNameContainer = document.getElementById('product-name-container');
     const price = parseFloat(textPrice);
-    const addPrice = parseFloat(textAddPrice);
+    return price;
+}
+function addToCart(id, name) {
+    const productNameContainer = document.getElementById('product-name-container');
+    const price = getPrice(id);
+    const addPrice = getPrice('add-price');
     const newPrice = (price + addPrice).toFixed(2);
     document.getElementById('add-price').innerText = newPrice;
     document.getElementById('total-price').innerText = newPrice;
@@ -19,16 +22,13 @@ function addToCart(id, name) {
         document.getElementById('coupon-btn').removeAttribute('disabled');
     }
 }
-
 function coupon() {
     const couponInput = document.getElementById('coupon-input');
     const couponValue = couponInput.value;
     document.getElementById('coupon-input').value = '';
-    const addPrice = parseFloat(document.getElementById('add-price').innerText);
-    console.log(addPrice)
+    const addPrice = getPrice('add-price');
 
     if (couponValue === 'SELL200') {
-        const textDiscountPrice = document.getElementById('discount-price').innerText;
         const discountPrice = (addPrice * 0.2).toFixed(2);
         document.getElementById('discount-price').innerText = discountPrice;
         document.getElementById('total-price').innerText = (addPrice - discountPrice).toFixed(2);
@@ -37,7 +37,7 @@ function coupon() {
     }
 
 }
-
-function goHome(){
-    window.location.href='index.html';
+function goHome() {
+    window.location.href = 'index.html';
 }
+
